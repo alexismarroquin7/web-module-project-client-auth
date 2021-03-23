@@ -3,6 +3,7 @@ import './App.css';
 import Login from "./components/Login";
 import FriendsList from "./components/FriendsList";
 import PrivateRoute from "./components/PrivateRoute";
+import AddFriendForm from "./components/AddFriendForm";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Link to="/login">Login</Link>
         <Link>Logout</Link>
       </div>
+      <PrivateRoute exact path="/new-friend" component={AddFriendForm} />
       <PrivateRoute exact path="/friends-list" component={FriendsList} />
       <Route exact path="/login" component={Login}/>
       <Route exact path="/">
