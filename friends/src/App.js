@@ -7,10 +7,13 @@ function App() {
     <Router>
     <div className="App">
       <div className="header">
-
+        <Link to="/login">Login</Link>
+        <Link>Logout</Link>
       </div>
       <Route exact path="/login" component={Login}/>
-      <Route exact path="/" component={Login}/>
+      <Route exact path="/">
+        <h2>Home</h2>
+      </Route>
     </div>
     </Router>
   );

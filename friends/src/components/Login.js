@@ -1,5 +1,6 @@
 import e from "cors";
 import React, { useState } from "react";
+import { axiosWithAuth } from "../utils/axiosWithAuth"
 
 const initialState = {
     username: "",
@@ -23,13 +24,16 @@ const Login = () => {
     return (
     <>
     <form onSubmit={login}>
+        <h3>Login</h3>
         <input
+        placeholder="Username:"
         type="text"
         name="username"
         value={credentials.username}
         onChange={handleChange}
         />
         <input
+        placeholder="Password:"
         type="password"
         name="password"
         value={credentials.password}
