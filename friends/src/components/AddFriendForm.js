@@ -46,6 +46,7 @@ const AddFriendForm = () => {
         <label>Email:
         <input type="email" name="email" value={newFriend.email} onChange={handleChange}/>
         </label><br />
+        <button onClick={() => history.push("/friends-list")} >Go Back</button>
         <button type="submit">Add Friend</button>
     </form>
     </>

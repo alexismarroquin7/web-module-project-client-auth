@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
-import Friend from "./Friend";
+// import PrivateRoute from "./PrivateRoute";
+// import Friend from "./Friend";
 
 const initialState = {
     friends: []
@@ -28,8 +29,8 @@ const FriendsList = () => {
         <h2>Friends List</h2>
         <Link to="/new-friend">Add New Friend</Link>
         {friends.length > 0 && friends.map(friend => {
-            
-            return <Friend key={friend.id} friend={friend} />
+
+            return <Link to={`/friends-list/${friend.id}`}><h3>{friend.name}</h3></Link>
         })}
     </div>
     </>

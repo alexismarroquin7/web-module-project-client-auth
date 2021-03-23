@@ -1,16 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams, useHistory } from "react-router-dom";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 
-const Friend = ({ friend }) => {
+const Friend = () => {
+    const { id } = useParams();
+    const { push } = useHistory();
+    const [friend, setFriend] = useState({});
 
-    const { name, age, email } = friend;
+    useEffect(() => {
+        axiosWithAuth()
+            .get(`/api/friends/${id}`)
+            .then(res => {
+                setFriend(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }, []);
 
     return (
     <>
-    <div className="Friend">
-        <h4>{name}</h4>
-        <p>{age}</p>
-        <p>{email}</p>
+    <div className="Friend-Container">
+    {friend &&  (
+            <div className="Friend">
+            <h4>{friend.name}</h4>
+            <p>{friend.age}</p>
+            <p>{friend.email}</p>
+            <button onClick={() => push("/friends-list")}>Go Back</button>
+            </div>
+        )}
     </div>
     </>
     );
