@@ -1,3 +1,6 @@
+import React from "react";
+
+
 const Friend = ({ friend }) => {
 
     const { name, age, email } = friend;

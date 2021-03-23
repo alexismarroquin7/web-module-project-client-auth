@@ -28,6 +28,7 @@ const FriendsList = () => {
         <h2>Friends List</h2>
         <Link to="/new-friend">Add New Friend</Link>
         {friends.length > 0 && friends.map(friend => {
+            
             return <Friend key={friend.id} friend={friend} />
         })}
     </div>

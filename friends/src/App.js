@@ -6,12 +6,18 @@ import PrivateRoute from "./components/PrivateRoute";
 import AddFriendForm from "./components/AddFriendForm";
 
 function App() {
+
+  const logout = e => {
+    localStorage.removeItem("token");
+    window.location = "/";
+  }
+
   return (
     <Router>
     <div className="App">
       <div className="header">
         <Link to="/login">Login</Link>
-        <Link>Logout</Link>
+        <Link onClick={logout}>Logout</Link>
       </div>
       <PrivateRoute exact path="/new-friend" component={AddFriendForm} />
       <PrivateRoute exact path="/friends-list" component={FriendsList} />
