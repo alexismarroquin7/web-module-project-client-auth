@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import axios from "axios";
 
 const initialState = {
     credentials: {
@@ -23,10 +23,10 @@ const Login = () => {
 
     const login = (e) => {
         e.preventDefault();
-        axiosWithAuth()
-            .post("/api/login", credentials)
+        axios
+            .post("http://localhost:5000/api/login", credentials)
             .then(res => {
-                localStorage.setItem(res.data.payload);
+                localStorage.setItem("token", res.data.payload);
             })
             .catch(err => {
                 setError(err.response.data.error);
