@@ -1,24 +1,36 @@
-import e from "cors";
 import React, { useState } from "react";
-import { axiosWithAuth } from "../utils/axiosWithAuth"
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const initialState = {
-    username: "",
-    password: ""
+    credentials: {
+        username: "",
+        password: ""
+    },
+    error: ""
 }
 
 const Login = () => {
-    const [credentials, setCredentials] = useState(initialState);
+    const [credentials, setCredentials] = useState(initialState.credentials);
+    const [error, setError] = useState(initialState.error);
 
     const handleChange = (e) => {
         setCredentials({
             ...credentials,
             [e.target.name]: e.target.value
         })
+        setError(initialState.error);
     }
 
-    const login = () => {
+    const login = (e) => {
         e.preventDefault();
+        axiosWithAuth()
+            .post("/api/login", credentials)
+            .then(res => {
+                localStorage.setItem(res.data.payload);
+            })
+            .catch(err => {
+                setError(err.response.data.error);
+            })
     }
 
     return (
@@ -40,6 +52,7 @@ const Login = () => {
         onChange={handleChange}
         />
         <button type="submit">Login</button>
+        {error && <p style={{color: "red"}}>{error}</p>}
     </form>
     </>
     );
