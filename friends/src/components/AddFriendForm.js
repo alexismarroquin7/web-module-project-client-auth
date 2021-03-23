@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { useHistory } from "react-router-dom"
 
 const initialState = {
     newFriend: {
@@ -9,19 +11,27 @@ const initialState = {
 }
 
 const AddFriendForm = () => {
-
+    const history = useHistory();
     const [newFriend, setNewFriend] = useState(initialState.newFriend)
 
     const handleChange = e => {
         setNewFriend({
             ...newFriend,
-            [e.target.value]: e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
     const handleSubmit = e => {
         e.preventDefault();
-
+        if(newFriend.name === "" || newFriend.age === "" || newFriend.email === "") return;
+        axiosWithAuth()
+            .post(`/api/friends`, newFriend)
+            .then(res => {
+                history.push("/friends-list");
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 
     return (
