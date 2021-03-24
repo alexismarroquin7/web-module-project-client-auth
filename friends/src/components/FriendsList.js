@@ -21,10 +21,7 @@ const FriendsList = () => {
                 console.log(err)
             })
     }, []);
-
-    if (friends.length === 0)
-        return <h3>Loading Friends...</h3>
-
+    
     return (
     <>
     <div>
